@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,5 +65,17 @@ public class CommentService {
         taget.patch(dto);
         Comment updated = commentRepository.save(taget);
         return CommentDto.creatCommentDto(updated);
+    }
+
+    @Transactional
+    public boolean delete(Long id) {
+        //대상 댓글 조회
+        Optional<Comment> target = commentRepository.findById(id);
+        if(target.isPresent()) {
+            commentRepository.delete(target.get());
+            return true;
+        }
+        else
+            return false;
     }
 }
