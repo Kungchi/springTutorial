@@ -24,6 +24,7 @@ dependencies {
 	//롬북
 	compileOnly("org.projectlombok:lombok:1.18.28")
 	annotationProcessor("org.projectlombok:lombok:1.18.28")
+	implementation("mysql:mysql-connector-java:8.0.33")
 }
 
 tasks.withType<Test> {

@@ -1,5 +1,6 @@
 package com.example.firstproject.api;
 
+import com.example.firstproject.annotation.RunningTime;
 import com.example.firstproject.dTO.CommentDto;
 import com.example.firstproject.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ public class CommentApiController {
     private CommentService commentService;
 
     // 댓글 목록 조회
-    @GetMapping("/api/articles/{articleId}/comments")
+        @GetMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<List<CommentDto>> comments(@PathVariable Long articleId) {
         List<CommentDto> dtos = commentService.comments(articleId);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
@@ -39,6 +40,7 @@ public class CommentApiController {
 
     }
     //댓글 삭제
+    @RunningTime
     @DeleteMapping("/api/comments/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         boolean deleted = commentService.delete(id);
